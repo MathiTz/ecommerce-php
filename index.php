@@ -13,7 +13,7 @@ $app->get('/', function() {
     
 	$page = new Page();
 
-	$page-setTpl("index");
+	$page->setTpl("index");
 });
 
 $app->run();

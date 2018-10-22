@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 require_once("vendor/autoload.php");
 
 use \Slim\Slim;
@@ -19,6 +19,8 @@ $app->get('/', function() {
 });
 
 $app->get('/admin', function() {
+
+	User::verifyLogin();
     
 	$page = new PageAdmin();
 
@@ -42,6 +44,13 @@ $app->post('/admin/login', function() {
 	header("Location: /admin");
 	exit;
 
+});
+
+$app->get('/admin/logout', function(){
+	User::logout();
+
+	header("Location: /admin/login");
+	exit;
 });
 
 $app->run();

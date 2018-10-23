@@ -91,15 +91,16 @@ $app->post("/admin/users/create", function(){
 
 	$user = new User();
 
-	$_POST["inadmin"] = (isset($_POST["inadmin"]))?1:0;
+	$_POST["inadmin"] = (isset($_POST['inadmin']))?1:0;
 
-	$user->setData($_POST);
+	$user->setData($_POST);	
 
 	$user->save();
 
-	header('Location: /admin/users');
-	exit;
+	var_dump($user);
 
+	header('location: /admin/users');
+	exit();
 });
 
 $app->post("/admin/users/:iduser", function($iduser){

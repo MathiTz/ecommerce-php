@@ -70,20 +70,19 @@ class User extends Model {
 
     public function save()
     {
+
         $sql = new Sql();
 
         $results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
             ":desperson"=>$this->getdesperson(),
-            ":deslogin"=>$this->deslogin(),
+            ":deslogin"=>$this->getdeslogin(),
             ":despassword"=>$this->getdespassword(),
             ":desemail"=>$this->getdesemail(),
             ":nrphone"=>$this->getnrphone(),
             ":inadmin"=>$this->getinadmin()
-
         ));
 
-        $this->setData($results);
-        header('location: /admin/users');
+        $this->setData($results[0]);
     }
 }
 

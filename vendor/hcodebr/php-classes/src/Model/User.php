@@ -82,7 +82,8 @@ class User extends Model {
 
         ));
 
-        $this->setData($results[0]);
+        $this->setData($results);
+        header('location: /admin/users');
     }
 }
 

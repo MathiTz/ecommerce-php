@@ -152,7 +152,9 @@ class User extends Model {
             {
                 $dataRecovery = $results2[0];
 
-                base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB));
+                $hash = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB);
+
+                $hash_64 = base64_encode($hash);
 
                 $link = "http://127.0.0.1/admin/forgot/reset";
 

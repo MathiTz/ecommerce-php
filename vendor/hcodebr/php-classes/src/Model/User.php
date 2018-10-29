@@ -152,9 +152,9 @@ class User extends Model {
             {
                 $dataRecovery = $results2[0];
 
-                $code = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_EBC));
+                $code = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB));
 
-                $link = "http://127.0.0.1/admin/forgot/reset";
+                $link = "http://localhost:8080/admin/forgot/reset";
 
                 $mailer = new Mailer($data["desmail"], $data["desperson"], "Redefinir Senha da Hcode Store", "forgot", array(
                     "name"=>$data["desperson"],

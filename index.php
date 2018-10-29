@@ -223,7 +223,7 @@ $app->post("/admin/categories/create", function(){
 
 	$category = new Category();
 
-	$category->set($_POST);
+	$category->setData($_POST);
 
 	$category->save();
 

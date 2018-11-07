@@ -90,14 +90,14 @@
                             <img src="{$value.desphoto}" alt="">
                             <div class="product-hover">
                                 <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Comprar</a>
-                                <a href="/products/{$value.desurl}"" class="view-details-link"><i class="fa fa-link"></i> Ver detalhes</a>
+                                <a href="/products/{$value.desurl}" class="view-details-link"><i class="fa fa-link"></i> Ver detalhes</a>
                             </div>
                         </div>
                         
-                        <h2><a href="/products/{$value.desurl}">{}$values.desproduct</a></h2>
+                        <h2><a href="/products/{$value.desurl}">{$value.desproduct}</a></h2>
 
                         <div class="product-carousel-price">
-                            <ins>R${$value.vlprice}</ins>
+                            <ins>R${function="formatPrice($value.vlprice)"}</ins>
                         </div>
                     </div>
                     {/loop}

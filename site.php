@@ -57,4 +57,11 @@ $app->get("/products/:desurl", function($desurl){
 	]);
 });
 
+$app->get("/cart", function(){
+	
+	$page = new Page();
+
+	$page->setTpl("cart");
+})
+
 ?>

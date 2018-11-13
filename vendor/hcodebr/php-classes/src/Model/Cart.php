@@ -5,6 +5,7 @@ namespace Hcode\Model;
 use \Hcode\DB\Sql;
 use \Hcode\Model;
 use \Hcode\Mailer;
+use \Hcode\Model\User;
 
 class Cart extends Model {
 
@@ -25,10 +26,18 @@ class Cart extends Model {
                 $data = [
                     'dessessionid'=>session_id()
                 ];
+                if(User::checkLogin(false))
+                {
+                    $user = User::getFromSession();
 
-                $user = User::getFromSession();
+                    $data['iduser'] = $user->getiduser();
+                }
 
-                if($user->getiduser() > )
+                $cart->setData($data);
+
+                $cart->save();
+
+                $cart->setToSession();
 
             }
 
@@ -37,13 +46,19 @@ class Cart extends Model {
         return $cart;
     }
 
-    public function getFromSessionID(int $idcart)
+    public function setToSession()
+    {
+        $_SESSION[Cart::SESSION] = $this->getValues();
+    }
+
+    public function getFromSessionID()
     {
         $sql = new Sql();
 
         $results = $sql->select("SELECT * FROM tb_carts WHERE dessessionid = :dessessionid", [
             ':dessessionid'=>session_id()
         ]);
+        
         if (count($results) > 0){
 
             $this->setData($results[0]);

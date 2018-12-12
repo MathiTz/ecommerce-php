@@ -60,8 +60,6 @@ $app->get("/products/:desurl", function($desurl){
 
 $app->get("/cart", function(){
 
-	$cart = Cart::getFromSession();
-	
 	$page = new Page();
 
 	$page->setTpl("cart");

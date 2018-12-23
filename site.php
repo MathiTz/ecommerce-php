@@ -8,7 +8,7 @@ use \Hcode\Model\Cart;
 $app->get('/', function() {
 
 	$products = Product::listAll();
-    
+
 	$page = new Page();
 
 	$page->setTpl("index", [
@@ -28,7 +28,7 @@ $app->get('/categories/:idcategory', function($idcategory)
 
 	$pages = [];
 
-	for ($i=1 ; $i <= $pagination['pages']  ; $i++ ) { 
+	for ($i=1 ; $i <= $pagination['pages']  ; $i++ ) {
 		array_push($pages, [
 			'link'=>'/categories/'.$category->getidcategory().'?page='.$i,
 			'page'=>$i
@@ -66,7 +66,8 @@ $app->get("/cart", function(){
 
 	$page->setTpl("cart", [
 		'cart'=>$cart->getValues(),
-		'products'=>$cart->getProducts()
+		'products'=>$cart->getProducts(),
+		'error'=>Cart::getMsgError()
 	]);
 });
 
@@ -81,7 +82,7 @@ $app->get("/cart/:idproduct/add", function($idproduct){
 	$qtd = (isset($_GRT['qtd'])) ? (int)$_GET['qtd'] : 1;
 
 	for ($i = 0; $i < $qtd; $i++){
-		
+
 		$cart->addProduct($product);
 	}
 
@@ -121,6 +122,16 @@ $app->get("/cart/:idproduct/remove", function($idproduct){
 
 });
 
+$app->post("/cart/freight", function(){
+
+	$cart = Cart::getFromSession();
+
+	$cart->setFreight($_POST['zipcode']);
+
+	header('location: /cart');
+	exit;
+
+});
 
 
 
